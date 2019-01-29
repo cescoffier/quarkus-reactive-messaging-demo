@@ -1,4 +1,4 @@
-package me.escoffier.reactive_summit.mqtt;
+package mqtt;
 
 import io.netty.handler.codec.mqtt.MqttQoS;
 import io.vertx.core.AsyncResult;
@@ -6,7 +6,7 @@ import io.vertx.reactivex.core.Vertx;
 import io.vertx.reactivex.core.buffer.Buffer;
 import io.vertx.reactivex.mqtt.MqttClient;
 import io.vertx.reactivex.mqtt.messages.MqttConnAckMessage;
-import me.escoffier.reactive_summit.Neo;
+import me.escoffier.protean.reactive.Neo;
 import me.escoffier.protean.reactive.simulator.measures.Patient;
 
 public class Sensor {
@@ -24,12 +24,9 @@ public class Sensor {
     this.patient = neo.getPatient();
   }
 
-
-
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx();
     new Sensor(vertx).run();
-
   }
 
   private void run() {
@@ -42,8 +39,12 @@ public class Sensor {
       throw new IllegalStateException("Unable to connect to the MQTT broker");
     }
 
-    vertx.setPeriodic(2000, x ->
-      mqtt.publish("neo", new Buffer(patient.measure().toBuffer()), MqttQoS.AT_LEAST_ONCE, false, false));
+    vertx.setPeriodic(2000, x -> {
+      System.out.println("sending...");
+      mqtt.publish("neo", new Buffer(patient.measure().toBuffer()), MqttQoS.AT_LEAST_ONCE, false, false, done -> {
+        System.out.println("Has been sent: " + done.succeeded());
+      });
+    });
 
   }
 }

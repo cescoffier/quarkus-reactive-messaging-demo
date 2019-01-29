@@ -1,4 +1,4 @@
-package me.escoffier.reactive_summit;
+package me.escoffier.protean.reactive;
 
 import io.reactivex.Flowable;
 import me.escoffier.protean.reactive.simulator.measures.BloodPressureGenerator;

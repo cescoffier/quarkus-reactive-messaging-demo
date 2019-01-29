@@ -22,7 +22,7 @@ The broker is stopped using `CTRL+C`
 * Terminal 2 - Run the MQTT "sensor" application
 ```bash
 cd demo4
-java -cp target/demo4-1.0-SNAPSHOT.jar me.escoffier.reactive_summit.mqtt.Sensor
+java -cp target/demo4-1.0-SNAPSHOT.jar Sensor
 ```
 
 The application is stopped using `CTRL+C`
@@ -41,7 +41,7 @@ The application is stopped with `CTRL+C`.
 
 ## Points of interest
 
-* The `me.escoffier.reactive_summit.demo4.HealthDataProcessor.process` method:
+* The `HealthDataProcessor.process` method:
   
   * Retrieve a stream MQTT Message
   * `MqttMessage` is the envelope. So far we only manipulated payload.
