@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neo the Rabbit</title>
+
+  <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+  <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+
+  <style>
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    p {
+      font-size: large;
+    }
+  </style>
+</head>
+<body class="cards-pf">
+<nav class="navbar navbar-default navbar-pf" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">
+      <span>Reactive Neo-Meter</span>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse navbar-collapse-1">
+  </div>
+</nav>
+
+<div class="container-fluid container-cards-pf">
+  <div class="row row-cards-pf">
+    <div class="col-xs-6 col-sm-4 col-md-4">
+      <div class="card-pf">
+        <div class="card-pf-heading">
+          <h2 class="card-pf-title">
+            Neo Current Activity
+          </h2>
+        </div>
+        <div class="card-pf-body">
+          <p>Neo is <span id="activity" class="label label-primary">N/A</span></p>
+          <div class="text-center">
+            <img id="pic" src="img/neo/neo-awake.png" class="img-circle float-left float-right">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-4">
+      <div class="card-pf">
+        <div class="card-pf-heading">
+          <h2 class="card-pf-title">
+            Heartbeat
+          </h2>
+        </div>
+        <div id="neo-heartbeat" class="line-chart-pf"></div>
+      </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-4 col-md-4">
+      <div class="card-pf">
+        <div class="card-pf-heading">
+          <h2 class="card-pf-title">
+            Temperature (polling snapshot service)
+          </h2>
+        </div>
+        <div class="pct-donut-chart-pf">
+          <div class="pct-donut-chart-pf-chart">
+            <div id="neo-temperature"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/js/patternfly.min.js"></script>
+<!-- C3, D3 - Charting Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
+
+<script>
+  var heartbeat = ["heartbeat"];
+
+  $(document).ready(function() {
+    // initialize charts
+
+    // Heartbeat (line)
+    var singleLineChartConfig = $().c3ChartDefaults().getDefaultSingleLineConfig();
+    singleLineChartConfig.bindto = '#neo-heartbeat';
+    singleLineChartConfig.data = {
+      columns: [heartbeat],
+      type: 'line'
+    };
+    var heartbeatChart = c3.generate(singleLineChartConfig);
+
+    // Temperature (donut)
+    var donutConfig2 = $().c3ChartDefaults().getDefaultDonutConfig('38.0');
+
+    donutConfig2.bindto = '#neo-temperature';
+    donutConfig2.data = {
+      type: "donut",
+      columns: [
+        ["Used", 38.0],
+        ["Available", 50]
+      ],
+      groups: [
+        ["used", "available"]
+      ],
+      order: null
+    };
+
+    donutConfig2.tooltip = {
+      contents: $().pfGetUtilizationDonutTooltipContentsFn('ºC')
+    };
+
+    var temperatureChart = c3.generate(donutConfig2);
+
+    var activitySource = new EventSource("/neo");
+    activitySource.onmessage = function(event) {
+     applyNeoState(event.data);
+    };
+
+    var heartbeatSource = new EventSource("/beat");
+    heartbeatSource.onmessage = function(event) {
+      var value = JSON.parse(event.data).heartbeat;
+      _add(heartbeat, value, 10);
+      heartbeatChart.load( {
+        columns: [ heartbeat ]
+      });
+    };
+
+    startTemperaturePolling(temperatureChart);
+
+    // matchHeight the contents of each .card-pf and then the .card-pf itself
+    $(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();
+    $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
+    $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer").matchHeight();
+    $(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();
+  });
+
+  function _add(array, value, max) {
+    if (array.length === max) {
+      array.splice(1, 1);
+    }
+    array.push(value);
+    return array;
+  }
+
+  function applyNeoState(state) {
+    if (state === "awake") {
+      setPicture("neo-awake.png");
+      setState("awake");
+    } else if (state === "sleeping") {
+      setPicture("neo-sleeping.png");
+      setState("sleeping");
+    } else {
+      setPicture("neo-eating.png");
+      setState("eating");
+    }
+  }
+
+  function setPicture(path) {
+    $("#pic").attr("src", "img/neo/" + path);
+  }
+
+  function setState(state) {
+    $("#activity").html(state);
+  }
+
+  function startTemperaturePolling(temperatureChart) {
+    setInterval(
+      function() {
+        $.get("/snapshot/temperature", function(res) {
+          var value = parseFloat(res);
+          temperatureChart.load( {
+            columns: [
+              ["Used", res],
+              ["Available", 50 - value]
+            ]
+          });
+          $().pfSetDonutChartTitle("#neo-temperature", value.toFixed(1), "ºC");
+        }, "text")
+      },
+      3000)
+  }
+
+</script>
+</html>

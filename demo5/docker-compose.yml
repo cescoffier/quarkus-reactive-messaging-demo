@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mqtt:
+    image: "eclipse-mosquitto:1.4.12"
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+  zookeeper:
+    image: "confluent/zookeeper"
+    ports:
+      - "2181:2181"
+  kafka:
+    image: "confluent/kafka"
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=localhost
+    links:
+      - zookeeper

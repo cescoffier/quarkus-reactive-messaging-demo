@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neo the Rabbit</title>
+
+  <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+  <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+
+  <style>
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    p {
+      font-size: large;
+    }
+  </style>
+</head>
+<body class="cards-pf">
+
+<div class="container-fluid container-cards-pf">
+  <div class="row row-cards-pf">
+    <div class="col-xs-6 col-sm-4 col-md-4">
+      <div class="card-pf">
+        <div class="card-pf-heading">
+          <h2 class="card-pf-title">
+            Neo Current Activity
+          </h2>
+        </div>
+        <div class="card-pf-body">
+          <p>Neo is <span id="activity" class="label label-primary">N/A</span></p>
+          <div class="text-center">
+          <img id="pic" src="/neo/neo-awake.png" class="img-circle float-left float-right">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/js/patternfly.min.js"></script>
+<script>
+
+  $(document).ready(function() {
+    var source = new EventSource("/app/neo");
+    source.onmessage = function(event) {
+     applyNeoState(event.data);
+    }
+  });
+
+  function applyNeoState(state) {
+    if (state === "awake") {
+      setPicture("neo-awake.png");
+      setState("awake");
+    } else if (state === "sleeping") {
+      setPicture("neo-sleeping.png");
+      setState("sleeping");
+    } else {
+      setPicture("neo-eating.png");
+      setState("eating");
+    }
+  }
+
+  function setPicture(path) {
+    $("#pic").attr("src", "/neo/" + path);
+  }
+
+  function setState(state) {
+    $("#activity").html(state);
+  }
+
+</script>
+</html>
