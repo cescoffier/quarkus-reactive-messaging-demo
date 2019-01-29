@@ -22,7 +22,7 @@ The application is stopped with `CTRL+C`.
 
 ## Points of interest
 
-* The `me.escoffier.reactive_summit.demo3.HealthDataProcessor` class:
+* The `HealthDataProcessor` class:
   
   * Rewrite of the processor method to manipulate streams using MicroProfile Reactive Stream Operators
   * `PublisherBuilder` can be seen as a Reactive Streams Publisher with operators.

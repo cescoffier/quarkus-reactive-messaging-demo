@@ -44,7 +44,7 @@
         <div class="card-pf-body">
           <p>Neo is <span id="activity" class="label label-primary">N/A</span></p>
           <div class="text-center">
-            <img id="pic" src="img/neo/neo-awake.png" class="img-circle float-left float-right">
+            <img id="pic" src="neo/neo-awake.png" class="img-circle float-left float-right">
           </div>
         </div>
       </div>
@@ -124,12 +124,12 @@
 
     var temperatureChart = c3.generate(donutConfig2);
 
-    var activitySource = new EventSource("/neo");
+    var activitySource = new EventSource("/app/neo");
     activitySource.onmessage = function(event) {
      applyNeoState(event.data);
     };
 
-    var heartbeatSource = new EventSource("/beat");
+    var heartbeatSource = new EventSource("/app/beat");
     heartbeatSource.onmessage = function(event) {
       var value = JSON.parse(event.data).heartbeat;
       _add(heartbeat, value, 10);
@@ -169,7 +169,7 @@
   }
 
   function setPicture(path) {
-    $("#pic").attr("src", "img/neo/" + path);
+    $("#pic").attr("src", "/neo/" + path);
   }
 
   function setState(state) {

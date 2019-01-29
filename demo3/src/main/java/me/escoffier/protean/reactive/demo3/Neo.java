@@ -1,4 +1,4 @@
-package me.escoffier.reactive_summit.demo3;
+package me.escoffier.protean.reactive.demo3;
 
 import io.reactivex.Flowable;
 import me.escoffier.protean.reactive.simulator.measures.BloodPressureGenerator;
@@ -27,7 +27,7 @@ public class Neo {
 
   public Publisher<String> state() {
     return Flowable.fromArray("sleeping", "awake", "eating")
-      .zipWith(Flowable.interval(10, TimeUnit.SECONDS), (a, b) -> a)
+      .zipWith(Flowable.interval(5, TimeUnit.SECONDS), (a, b) -> a)
       .repeat();
   }
 

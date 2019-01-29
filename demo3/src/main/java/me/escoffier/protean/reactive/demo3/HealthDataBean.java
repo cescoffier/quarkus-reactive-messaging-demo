@@ -1,4 +1,4 @@
-package me.escoffier.reactive_summit.demo3;
+package me.escoffier.protean.reactive.demo3;
 
 import io.vertx.core.json.JsonObject;
 import me.escoffier.protean.reactive.simulator.measures.Patient;
@@ -12,7 +12,7 @@ import java.util.concurrent.*;
 public class HealthDataBean {
 
   @Inject
-  private Patient patient;
+  Patient patient;
 
   @Outgoing("health")
   public CompletionStage<JsonObject> health() {

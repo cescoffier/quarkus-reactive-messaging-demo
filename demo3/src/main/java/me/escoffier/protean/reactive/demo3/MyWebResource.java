@@ -1,11 +1,10 @@
-package me.escoffier.protean.reactive.demo2;
+package me.escoffier.protean.reactive.demo3;
 
 import io.smallrye.reactive.messaging.annotations.Stream;
 import io.vertx.core.json.JsonObject;
 import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
 import org.reactivestreams.Publisher;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,7 +19,7 @@ public class MyWebResource {
 
     @Inject
     @Stream("heartbeat")
-    private Publisher<JsonObject> heartbeat;
+    Publisher<JsonObject> heartbeat;
 
     @Produces(MediaType.SERVER_SENT_EVENTS)
     @GET
