@@ -1,4 +1,4 @@
-package me.escoffier.protean.reactive.demo4;
+package me.escoffier.protean.reactive;
 
 
 import io.vertx.reactivex.core.Vertx;

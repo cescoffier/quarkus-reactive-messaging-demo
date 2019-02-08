@@ -7,6 +7,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.client.WebClientOptions;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
@@ -26,13 +27,21 @@ public class HealthDataProcessor {
   private static final Logger LOGGER = LoggerFactory.getLogger(HealthDataProcessor.class);
 
   @Inject
+  @ConfigProperty(name = "snapshot.host")
+  String host;
+
+  @Inject
+  @ConfigProperty(name = "snapshot.port")
+  int port;
+
+  @Inject
   Vertx vertx;
 
   private WebClient client;
 
   @PostConstruct
   public void init() {
-    client = WebClient.create(vertx, new WebClientOptions().setDefaultHost("localhost").setDefaultPort(8080));
+    client = WebClient.create(vertx, new WebClientOptions().setDefaultHost(host).setDefaultPort(port));
   }
 
   @Incoming("health")

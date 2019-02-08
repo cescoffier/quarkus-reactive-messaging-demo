@@ -179,7 +179,7 @@
   function startTemperaturePolling(temperatureChart) {
     setInterval(
       function() {
-        $.get("/snapshot/temperature", function(res) {
+        $.get("http://localhost:8081/snapshot/temperature", function(res) {
           var value = parseFloat(res);
           temperatureChart.load( {
             columns: [

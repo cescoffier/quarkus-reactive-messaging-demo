@@ -1,5 +1,4 @@
-package me.escoffier.protean.reactive.demo4.snapshot;
-
+package me.escoffier.protean.reactive.snapshot;
 
 import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
@@ -64,5 +63,4 @@ public class SnapshotService {
     public double timestamp() {
         return timestamp;
     }
-
 }
