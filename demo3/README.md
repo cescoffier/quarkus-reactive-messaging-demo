@@ -11,10 +11,10 @@ This demo extends Demo 2.
 
 ``bash
 cd demo3
-java -jar target/demo3-1.0-SNAPSHOT.jar
+mvn compile shamrock:dev
 ``
 
-Open http://localhost:9000/webroot/index.html.
+Open http://localhost:8080.
 
 On the UI, another card is displayed (temperature). The data is retrieved by periodic polling from the _snapshot_ service.
 
@@ -28,3 +28,9 @@ The application is stopped with `CTRL+C`.
   * `PublisherBuilder` can be seen as a Reactive Streams Publisher with operators.
   * `flatMapCompletionStage` allow sequential composition of asynchronous action in the processing pipeline
   
+## Native compilation  
+  
+```bash
+mvn clean package -Pnative
+./target/demo3-1.0-SNAPSHOT-runner
+```
