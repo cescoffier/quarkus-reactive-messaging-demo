@@ -1,4 +1,4 @@
-package me.escoffier.reactive_summit.demo5.snapshot;
+package me.escoffier.protean.reactive.demo5.snapshot;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
@@ -26,6 +26,6 @@ public class SnapshotService extends AbstractVerticle {
       temperature = rc.getBodyAsJson();
       rc.response().end("OK");
     });
-    vertx.createHttpServer().requestHandler(router::accept).listen(9001);
+    vertx.createHttpServer().requestHandler(router).listen(9001);
   }
 }

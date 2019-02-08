@@ -13,7 +13,7 @@
   <properties>
     <vertx.version>3.6.2</vertx.version>
     <shamrock.version>1.0.0.Alpha1-SNAPSHOT</shamrock.version>
-    <smallrye-reactive-messaging.version>0.0.3</smallrye-reactive-messaging.version>
+    <smallrye-reactive-messaging.version>0.0.4</smallrye-reactive-messaging.version>
   </properties>
 
   <modules>
@@ -22,7 +22,7 @@
     <module>demo2</module>
     <module>demo3</module>
     <module>demo4</module>
-    <!--<module>demo5</module>-->
+    <module>demo5</module>
   </modules>
 
   <dependencyManagement>

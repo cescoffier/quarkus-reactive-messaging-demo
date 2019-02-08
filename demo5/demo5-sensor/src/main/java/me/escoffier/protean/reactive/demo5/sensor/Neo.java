@@ -1,4 +1,4 @@
-package me.escoffier.reactive_summit.demo5.sensor;
+package me.escoffier.protean.reactive.demo5.sensor;
 
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;

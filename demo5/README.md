@@ -74,7 +74,7 @@ The application is stopped with `CTRL+C`.
 
 ## Points of interest
 
-* The `me.escoffier.reactive_summit.demo5.collector.HealthDataCollector` class:
+* The `HealthDataCollector` class:
   
   * shows the manipulation of MQTT messages and Kafka messages (key/value)
   * Creation of `KafkaMessage` allows setting the topic, key and value
@@ -89,7 +89,7 @@ The application is stopped with `CTRL+C`.
   * Kafka sink configuration
   * MQTT source configuration  
       
-* The `me.escoffier.reactive_summit.demo5.ForwarderProcessors` class:
+* The `ForwarderProcessors` class:
 
   * Different acknowledgement policies (required by Kafka)
   * Manual -> you do it, Pre-processing -> before processing the message, Post-processing -> after processing the message
@@ -97,7 +97,7 @@ The application is stopped with `CTRL+C`.
   * Manual acknowledgement -> `ack` method is asynchronous
   
   
-* The `me.escoffier.reactive_summit.demo5.TemperatureProcessor` class:
+* The `TemperatureProcessor` class:
 
   * Show a "sink" in code (`@Incoming` only)
   * For each input, send to the _snapshot_ service    
