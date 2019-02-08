@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.reactivex.core.Vertx;
 import io.vertx.reactivex.ext.web.client.WebClient;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,16 @@ public class TemperatureProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TemperatureProcessor.class);
 
+
+    @Inject
+    @ConfigProperty(name = "snapshot.host")
+    String host;
+
+    @Inject
+    @ConfigProperty(name = "snapshot.port")
+    int port;
+
+
     @Inject
     private Vertx vertx;
 
@@ -29,7 +40,7 @@ public class TemperatureProcessor {
 
     @PostConstruct
     public void init() {
-        client = WebClient.create(vertx, new WebClientOptions().setDefaultHost("localhost").setDefaultPort(9001));
+        client = WebClient.create(vertx, new WebClientOptions().setDefaultHost(host).setDefaultPort(port));
     }
 
 
@@ -38,14 +49,17 @@ public class TemperatureProcessor {
     public CompletionStage<Void> saveSnapshot(JsonObject temperature) {
         CompletableFuture<Void> future = new CompletableFuture<>();
         LOGGER.info("Saving snapshot {}", temperature.encode());
-        client.post("/snapshots").rxSendJsonObject(temperature)
+        client.post("/snapshot").rxSendJsonObject(temperature)
                 .ignoreElement()
                 .subscribe(
                         () -> {
                             LOGGER.info("Snapshot sent successfully");
                             future.complete(null);
                         },
-                        future::completeExceptionally
+                        err -> {
+                            err.printStackTrace();
+                            future.completeExceptionally(err);
+                        }
                 );
         return future;
     }

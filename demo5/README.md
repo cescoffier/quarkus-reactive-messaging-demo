@@ -6,7 +6,18 @@ This demo shows event-driven and async microservices. It uses HTTP, MQTT and Kaf
 
 * Using Kafka and MQTT
 * Acknowledgement policies
-* Using RX Java 2 
+* Using RX Java 2
+
+## Build the demo
+
+Take a deep breathe...
+
+```bash
+cd demo5
+mvn clean install -Pnative
+``` 
+
+Will take a lot of time...
 
 ## Run the demo
 
@@ -23,7 +34,7 @@ The broker is stopped using `CTRL+C`. You can reuse the one started as part of d
 * Terminal 2 - Run the MQTT "sensor" application
 ```bash
 cd demo5/demo5-sensor
-java -jar target/demo5-sensor-1.0-SNAPSHOT.jar 
+./target/demo5-sensor-1.0-SNAPSHOT-runner 
 ```
 
 The application is stopped using `CTRL+C`
@@ -40,21 +51,19 @@ The broker is stopped with `CTRL+C`.
 
 This application retrieves the data from MQTT and store it into Kafka. It also apply different actions on the data.
 
-``bash
+```bash
 cd demo5/demo5-collector
-java -jar target/demo5-collector-1.0-SNAPSHOT.jar
-``
+./target/demo5-collector-1.0-SNAPSHOT-runner -Dshamrock.http.port=8082
+```
 
 The application is stopped using `CTRL+C`
 
 * Terminal 5 - The snapshot service
 
-In previous demos, the service was running in the same process. In this version, it's a separated process.
-
-``bash
+```bash
 cd demo5/demo5-snapshot-service
-java -jar target/demo5-snapshot-service-1.0-SNAPSHOT.jar 
-``
+./target/demo5-snapshot-service-1.0-SNAPSHOT-runner -Dshamrock.http.port=8081 
+```
 
 The application is stopped using `CTRL+C`.
 
@@ -62,10 +71,10 @@ The application is stopped using `CTRL+C`.
 
 ```bash
 cd demo5/demo5-web
-java -jar target/demo5-web-1.0-SNAPSHOT.jar
+./target/demo5-web-1.0-SNAPSHOT-runner
 ```
 
-Open http://localhost:9000/webroot/index.html.
+Open http://localhost:8080.
 
 The UI has a new card (slower) displaying the number of leaps. It's slower because the data is accumulated using a time 
 window.

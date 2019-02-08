@@ -12,43 +12,61 @@
 
   <artifactId>demo5-snapshot-service</artifactId>
 
-  <properties>
-    <vertx.launcher>me.escoffier.protean.reactive.demo5.snapshot.SnapshotService</vertx.launcher>
-  </properties>
-
   <dependencies>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web</artifactId>
-      <version>${vertx.version}</version>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-jaxrs-deployment</artifactId>
     </dependency>
     <dependency>
-      <groupId>me.escoffier.protean</groupId>
-      <artifactId>rabbit-simulator</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-arc-deployment</artifactId>
+    </dependency>
+    <!-- Because of JSON Object -->
+    <dependency>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-vertx-deployment</artifactId>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>io.reactiverse</groupId>
-        <artifactId>vertx-maven-plugin</artifactId>
-        <version>1.0.17</version>
+        <groupId>org.jboss.shamrock</groupId>
+        <artifactId>shamrock-maven-plugin</artifactId>
+        <version>${shamrock.version}</version>
         <executions>
           <execution>
-            <id>vmp</id>
             <goals>
-              <goal>initialize</goal>
-              <goal>package</goal>
+              <goal>build</goal>
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <redeploy>true</redeploy>
-        </configuration>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jboss.shamrock</groupId>
+            <artifactId>shamrock-maven-plugin</artifactId>
+            <version>${shamrock.version}</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <configuration>
+                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

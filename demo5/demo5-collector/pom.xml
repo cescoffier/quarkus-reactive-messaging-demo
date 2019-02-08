@@ -35,13 +35,17 @@
     </dependency>
     <dependency>
       <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-jaxrs-deployment</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.shamrock</groupId>
       <artifactId>shamrock-reactive-streams-operators-deployment</artifactId>
     </dependency>
 
     <dependency>
       <groupId>io.smallrye.reactive</groupId>
       <artifactId>smallrye-reactive-messaging-mqtt</artifactId>
-      <version>0.0.4</version>
+      <version>${smallrye-reactive-messaging.version}</version>
     </dependency>
 
     <dependency>

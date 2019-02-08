@@ -219,8 +219,8 @@
   function startTemperaturePolling(temperatureChart) {
     setInterval(
       function() {
-        $.get("http://localhost:9001/snapshots", function(res) {
-          var value = JSON.parse(res).value;
+        $.get("http://localhost:8081/snapshot/temperature", function(res) {
+          var value = parseFloat(res);
           temperatureChart.load( {
             columns: [
               ["Used", value],

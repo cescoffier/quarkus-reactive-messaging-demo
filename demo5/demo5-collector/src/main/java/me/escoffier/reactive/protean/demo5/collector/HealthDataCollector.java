@@ -10,7 +10,6 @@ import io.vertx.core.json.JsonObject;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
-
 import org.eclipse.microprofile.reactive.streams.operators.ProcessorBuilder;
 import org.eclipse.microprofile.reactive.streams.operators.PublisherBuilder;
 import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
@@ -28,11 +27,11 @@ public class HealthDataCollector {
 
     @Incoming("health")
     @Outgoing("output")
-    public PublisherBuilder<KafkaMessage<String, JsonObject>> filterTemperature(PublisherBuilder<MqttMessage> input) {
-        return input
-                .peek(x -> System.out.println("HEALTH - Temp " + x))
+    public ProcessorBuilder<MqttMessage, KafkaMessage<String, JsonObject>> filterTemperature() {
+        return ReactiveStreams.<MqttMessage>builder()
                 .map(message -> Buffer.buffer(message.getPayload()).toJsonObject())
                 .map(json -> json.getJsonObject("temperature"))
+                .peek(x -> LOGGER.info("Received {} as temperature", x))
                 .map(json -> KafkaMessage.of("temperature", "neo", json));
     }
 
@@ -42,6 +41,7 @@ public class HealthDataCollector {
         return input
                 .map(message -> Buffer.buffer(message.getPayload()).toJsonObject())
                 .map(json -> json.getJsonObject("heartbeat"))
+                .peek(x -> LOGGER.info("Received {} as heartbeat", x))
                 .map(json -> KafkaMessage.of("heartbeat", "neo", json));
     }
 
@@ -52,7 +52,7 @@ public class HealthDataCollector {
                 .map(message -> Buffer.buffer(message.getPayload()).toJsonObject())
                 .map(json -> json.getJsonObject("state"))
                 .distinctUntilChanged(json -> json.getString("state")) // Filter on the "State" key of the json object.
-                .doOnNext(json -> LOGGER.info("Forwarding {} to Kafka", json.encode()))
+                .doOnNext(json -> LOGGER.info("Forwarding new state '{}' to Kafka", json.encode()))
                 .map(json -> KafkaMessage.of("state", "neo", json));
     }
 
@@ -60,10 +60,12 @@ public class HealthDataCollector {
     @Outgoing("output")
     public Flowable<KafkaMessage<String, JsonObject>> processSteps(Flowable<MqttMessage> input) {
         return input
+                .doOnNext(json -> LOGGER.info("Got: {}", json))
                 .map(message -> Buffer.buffer(message.getPayload()).toJsonObject())
-                .doOnNext(j -> LOGGER.info("Got " + j))
+                .doOnNext(json -> LOGGER.info("Got as json:  {}", json))
                 .map(json -> json.getJsonObject("leaps"))
                 .map(json -> json.getLong("value"))
+                .doOnNext(j -> LOGGER.info("Received {} as number of leaps", j))
                 .window(10, TimeUnit.SECONDS)
                 .flatMap(MathFlowable::sumLong)
                 .map(res -> new JsonObject().put("name", "leaps").put("value", res))

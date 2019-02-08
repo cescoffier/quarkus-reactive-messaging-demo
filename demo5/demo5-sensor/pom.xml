@@ -12,15 +12,19 @@
 
   <artifactId>demo5-sensor</artifactId>
 
-  <properties>
-    <vertx.launcher>me.escoffier.protean.reactive.demo5.sensor.SensorApplication</vertx.launcher>
-  </properties>
-
   <dependencies>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mqtt</artifactId>
-      <version>${vertx.version}</version>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-vertx-deployment</artifactId>
+      <version>${shamrock.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-arc-deployment</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-reactive-streams-operators-deployment</artifactId>
     </dependency>
 
     <dependency>
@@ -30,16 +34,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.25</version>
-    </dependency>
-
-    <dependency>
-      <groupId>io.reactivex.rxjava2</groupId>
-      <artifactId>rxjava</artifactId>
-      <!-- TODO should be extracted -->
-      <version>2.2.6</version>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mqtt</artifactId>
+      <version>${vertx.version}</version>
     </dependency>
 
   </dependencies>
@@ -47,23 +44,45 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>io.reactiverse</groupId>
-        <artifactId>vertx-maven-plugin</artifactId>
-        <version>1.0.17</version>
+        <groupId>org.jboss.shamrock</groupId>
+        <artifactId>shamrock-maven-plugin</artifactId>
+        <version>${shamrock.version}</version>
         <executions>
           <execution>
-            <id>vmp</id>
             <goals>
-              <goal>initialize</goal>
-              <goal>package</goal>
+              <goal>build</goal>
             </goals>
           </execution>
         </executions>
         <configuration>
-          <redeploy>true</redeploy>
+          <mainClass>me.escoffier.protean.reactive.demo5.sensor.SensorApp</mainClass>
         </configuration>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jboss.shamrock</groupId>
+            <artifactId>shamrock-maven-plugin</artifactId>
+            <version>${shamrock.version}</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <configuration>
+                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
