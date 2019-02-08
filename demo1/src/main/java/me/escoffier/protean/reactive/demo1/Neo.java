@@ -11,7 +11,7 @@ public class Neo {
 
   public Publisher<String> state() {
     return Flowable.fromArray("sleeping", "awake", "eating")
-      .zipWith(Flowable.interval(5, TimeUnit.SECONDS), (a, b) -> a)
+      .zipWith(Flowable.interval(3, TimeUnit.SECONDS), (a, b) -> a)
       .repeat();
   }
 

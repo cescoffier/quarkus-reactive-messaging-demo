@@ -9,10 +9,10 @@
 
 ``bash
 cd demo1
-mvn compile vertx:run
+mvn compile shamrock:dev 
 ``
 
-Open http://localhost:9000/webroot/index.html.
+Open http://localhost:8080
 
 The application is stopped with `CTRL+C`.
 
@@ -29,7 +29,7 @@ The application is stopped with `CTRL+C`.
 * With HTTPie: `http :9000/neo --stream` to illustrate what is produced by the stream:
 
 ```text
-$ http :9000/neo --stream
+$ http :8080/app/neo --stream
   HTTP/1.1 200 OK
   Content-Type: text/event-stream
   Set-Cookie: vertx-web.session=36226a51191fa92175848425850d39bb; Path=/
