@@ -32,7 +32,6 @@ The application is stopped with `CTRL+C`.
 $ http :8080/app/neo --stream
   HTTP/1.1 200 OK
   Content-Type: text/event-stream
-  Set-Cookie: vertx-web.session=36226a51191fa92175848425850d39bb; Path=/
   Transfer-Encoding: chunked
   
   
