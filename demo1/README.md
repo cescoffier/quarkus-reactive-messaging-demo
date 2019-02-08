@@ -46,3 +46,10 @@ $ http :8080/app/neo --stream
 ```   
 
 * You can illustrate the reload by editing the `Neo` class and increase the message frequency.
+
+## Native packaging
+
+```bash
+mvn clean package -Pnative
+./target/demo1-1.0-SNAPSHOT-runner
+```
