@@ -17,7 +17,7 @@ Open http://localhost:8080
 The application is stopped with `CTRL+C`.
 
 
-**IMPORTANT:** while it uses the Vert.x Maven Plugin, it's not required. It's just for the hot reload.
+**IMPORTANT:** while it uses the Shamrock Maven Plugin, it's not required. It's just for the hot reload.
 
 ## Points of interest
 
@@ -26,7 +26,7 @@ The application is stopped with `CTRL+C`.
   * Production of SSE
   * Publisher sent as response to a HTTP request
   
-* With HTTPie: `http :9000/neo --stream` to illustrate what is produced by the stream:
+* With HTTPie: `http :8080/app/neo --stream` to illustrate what is produced by the stream:
 
 ```text
 $ http :8080/app/neo --stream
