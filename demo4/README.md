@@ -41,7 +41,7 @@ cd demo4/sensor
 
 ```
 cd demo4/snapshot
-./target/snapshot-1.0-SNAPSHOT-runner -Dshamrock.http.port=8081
+./target/snapshot-1.0-SNAPSHOT-runner
 ```
 
 The application is stopped using `CTRL+C`

@@ -53,7 +53,7 @@ This application retrieves the data from MQTT and store it into Kafka. It also a
 
 ```bash
 cd demo5/demo5-collector
-./target/demo5-collector-1.0-SNAPSHOT-runner -Dshamrock.http.port=8082
+./target/demo5-collector-1.0-SNAPSHOT-runner
 ```
 
 The application is stopped using `CTRL+C`
@@ -62,7 +62,7 @@ The application is stopped using `CTRL+C`
 
 ```bash
 cd demo5/demo5-snapshot-service
-./target/demo5-snapshot-service-1.0-SNAPSHOT-runner -Dshamrock.http.port=8081 
+./target/demo5-snapshot-service-1.0-SNAPSHOT-runner 
 ```
 
 The application is stopped using `CTRL+C`.
