@@ -14,9 +14,9 @@
 
   <dependencies>
     <dependency>
-    <groupId>org.jboss.shamrock</groupId>
-    <artifactId>shamrock-reactive-messaging-deployment</artifactId>
-    <version>${shamrock.version}</version>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-reactive-messaging-deployment</artifactId>
+      <version>${shamrock.version}</version>
     </dependency>
     <dependency>
       <groupId>org.jboss.shamrock</groupId>

@@ -27,6 +27,4 @@ public class HealthDataBean {
   private void delay(Runnable runnable) {
     executor.schedule(runnable, 5, TimeUnit.SECONDS);
   }
-
-
 }

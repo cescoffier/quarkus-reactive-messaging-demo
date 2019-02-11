@@ -33,6 +33,6 @@ public class BloodGlucoseGenerator implements Generator {
       .put(NAME, name)
       .put(TIMESTAMP, System.currentTimeMillis())
       .put("value", generator.next()
-    );
+      );
   }
 }

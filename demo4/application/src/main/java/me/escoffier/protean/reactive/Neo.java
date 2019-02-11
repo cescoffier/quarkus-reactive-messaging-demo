@@ -22,13 +22,9 @@ public class Neo {
     );
   }
 
-
   public Publisher<String> state() {
     return Flowable.fromArray("sleeping", "awake", "eating")
       .zipWith(Flowable.interval(10, TimeUnit.SECONDS), (a, b) -> a)
       .repeat();
   }
-
-
-
 }

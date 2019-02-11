@@ -14,5 +14,4 @@ public class Neo {
       .zipWith(Flowable.interval(3, TimeUnit.SECONDS), (a, b) -> a)
       .repeat();
   }
-
 }

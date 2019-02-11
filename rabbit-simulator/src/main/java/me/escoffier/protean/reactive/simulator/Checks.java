@@ -11,7 +11,7 @@ public class Checks {
 
   public static <T> T checkArgument(T arg, Predicate<T> check) {
     Objects.requireNonNull(arg, "The argument must not be `null`");
-    if (! check.test(arg)) {
+    if (!check.test(arg)) {
       throw new IllegalArgumentException("Invalid argument " + arg);
     }
     return arg;

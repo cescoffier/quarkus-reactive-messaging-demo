@@ -2,71 +2,71 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>me.escoffier.protean</groupId>
-        <artifactId>protean-reactive-messaging-demo4-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+  <parent>
+    <groupId>me.escoffier.protean</groupId>
+    <artifactId>protean-reactive-messaging-demo4-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
 
-    <artifactId>snapshot</artifactId>
+  <artifactId>snapshot</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.jboss.shamrock</groupId>
-            <artifactId>shamrock-jaxrs-deployment</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.shamrock</groupId>
-            <artifactId>shamrock-arc-deployment</artifactId>
-        </dependency>
-        <!-- Because of JSON Object -->
-        <dependency>
-            <groupId>org.jboss.shamrock</groupId>
-            <artifactId>shamrock-vertx-deployment</artifactId>
-        </dependency>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-jaxrs-deployment</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-arc-deployment</artifactId>
+    </dependency>
+    <!-- Because of JSON Object -->
+    <dependency>
+      <groupId>org.jboss.shamrock</groupId>
+      <artifactId>shamrock-vertx-deployment</artifactId>
+    </dependency>
+  </dependencies>
 
-    <build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jboss.shamrock</groupId>
+        <artifactId>shamrock-maven-plugin</artifactId>
+        <version>${shamrock.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <build>
         <plugins>
-            <plugin>
-                <groupId>org.jboss.shamrock</groupId>
-                <artifactId>shamrock-maven-plugin</artifactId>
-                <version>${shamrock.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+          <plugin>
+            <groupId>org.jboss.shamrock</groupId>
+            <artifactId>shamrock-maven-plugin</artifactId>
+            <version>${shamrock.version}</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <configuration>
+                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
-    </build>
-    <profiles>
-        <profile>
-            <id>native</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.jboss.shamrock</groupId>
-                        <artifactId>shamrock-maven-plugin</artifactId>
-                        <version>${shamrock.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>native-image</goal>
-                                </goals>
-                                <configuration>
-                                    <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-    
+      </build>
+    </profile>
+  </profiles>
+
 </project>

@@ -11,26 +11,26 @@ import javax.ws.rs.Path;
 @Path("/snapshot")
 public class SnapshotService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SnapshotService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SnapshotService.class);
 
-    private JsonObject temperature;
+  private JsonObject temperature;
 
-    @POST
-    public String save(String payload) {
-        JsonObject json = new JsonObject(payload);
-        System.out.println("GOT: " + json);
-        temperature = json;
-        LOGGER.info("Snapshot saved: {}", temperature);
-        return "Saved";
+  @POST
+  public String save(String payload) {
+    JsonObject json = new JsonObject(payload);
+    System.out.println("GOT: " + json);
+    temperature = json;
+    LOGGER.info("Snapshot saved: {}", temperature);
+    return "Saved";
+  }
+
+  @GET
+  @Path("/temperature")
+  public double temperature() {
+    if (temperature != null) {
+      return temperature.getDouble("value");
+    } else {
+      return 0.0;
     }
-
-    @GET
-    @Path("/temperature")
-    public double temperature() {
-        if (temperature != null) {
-            return temperature.getDouble("value");
-        } else {
-            return 0.0;
-        }
-    }
+  }
 }

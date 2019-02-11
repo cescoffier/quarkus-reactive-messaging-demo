@@ -54,5 +54,4 @@ public class ForwarderProcessors {
     LOGGER.info("Forwarding state {}", json.encode());
     return json;
   }
-
 }

@@ -35,5 +35,4 @@ public class MyWebResource {
   public Publisher<String> beat() {
     return ReactiveStreams.fromPublisher(heartbeat).map(JsonObject::encode).buildRs();
   }
-
 }

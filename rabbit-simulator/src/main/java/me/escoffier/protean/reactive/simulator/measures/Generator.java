@@ -7,11 +7,11 @@ import io.vertx.core.json.JsonObject;
  */
 public interface Generator {
 
-    String TIMESTAMP = "timestamp";
-    String NAME = "name";
+  String TIMESTAMP = "timestamp";
+  String NAME = "name";
 
-    JsonObject generate();
+  JsonObject generate();
 
-    String name();
+  String name();
 
 }

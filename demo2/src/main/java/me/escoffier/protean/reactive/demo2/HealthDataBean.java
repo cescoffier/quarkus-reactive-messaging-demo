@@ -11,21 +11,20 @@ import java.util.concurrent.*;
 @ApplicationScoped
 public class HealthDataBean {
 
-    @Inject
-    private Patient patient;
-    // Just here to delay the emissions
-    private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+  @Inject
+  private Patient patient;
 
-    @Outgoing("health")
-    public CompletionStage<JsonObject> health() {
-        CompletableFuture<JsonObject> future = new CompletableFuture<>();
-        delay(() -> future.complete(patient.measure()));
-        return future;
-    }
+  // Just here to delay the emissions
+  private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
-    private void delay(Runnable runnable) {
-        executor.schedule(runnable, 5, TimeUnit.SECONDS);
-    }
+  @Outgoing("health")
+  public CompletionStage<JsonObject> health() {
+    CompletableFuture<JsonObject> future = new CompletableFuture<>();
+    delay(() -> future.complete(patient.measure()));
+    return future;
+  }
 
-
+  private void delay(Runnable runnable) {
+    executor.schedule(runnable, 5, TimeUnit.SECONDS);
+  }
 }

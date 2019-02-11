@@ -14,9 +14,9 @@
 
   <name>Reactive Messaging Demo 4 Parent</name>
 
- <modules>
-   <module>application</module>
-   <module>sensor</module>
-   <module>snapshot</module>
- </modules>
+  <modules>
+    <module>application</module>
+    <module>sensor</module>
+    <module>snapshot</module>
+  </modules>
 </project>

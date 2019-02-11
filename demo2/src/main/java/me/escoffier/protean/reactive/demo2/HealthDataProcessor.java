@@ -12,15 +12,13 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class HealthDataProcessor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HealthDataProcessor.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(HealthDataProcessor.class);
 
-
-    @Incoming("health")
-    @Outgoing("heartbeat")
-    @Broadcast
-    public JsonObject filtered(JsonObject input) {
-        LOGGER.info("Received {}", input.encode());
-        return input.getJsonObject("heartbeat");
-    }
-
+  @Incoming("health")
+  @Outgoing("heartbeat")
+  @Broadcast
+  public JsonObject filtered(JsonObject input) {
+    LOGGER.info("Received {}", input.encode());
+    return input.getJsonObject("heartbeat");
+  }
 }

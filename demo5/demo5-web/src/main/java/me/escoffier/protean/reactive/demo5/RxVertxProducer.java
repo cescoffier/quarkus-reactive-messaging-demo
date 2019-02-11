@@ -10,11 +10,11 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class RxVertxProducer {
 
-    @Inject
-    io.vertx.core.Vertx vertx;
+  @Inject
+  io.vertx.core.Vertx vertx;
 
-    @Produces
-    public Vertx vertx() {
-        return new Vertx(vertx);
-    }
+  @Produces
+  public Vertx vertx() {
+    return new Vertx(vertx);
+  }
 }

@@ -21,47 +21,43 @@ import static io.smallrye.reactive.messaging.annotations.Acknowledgment.Mode.POS
 @ApplicationScoped
 public class TemperatureProcessor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TemperatureProcessor.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TemperatureProcessor.class);
 
+  @Inject
+  @ConfigProperty(name = "snapshot.host")
+  String host;
 
-    @Inject
-    @ConfigProperty(name = "snapshot.host")
-    String host;
+  @Inject
+  @ConfigProperty(name = "snapshot.port")
+  int port;
 
-    @Inject
-    @ConfigProperty(name = "snapshot.port")
-    int port;
+  @Inject
+  private Vertx vertx;
 
+  private WebClient client;
 
-    @Inject
-    private Vertx vertx;
+  @PostConstruct
+  public void init() {
+    client = WebClient.create(vertx, new WebClientOptions().setDefaultHost(host).setDefaultPort(port));
+  }
 
-    private WebClient client;
-
-    @PostConstruct
-    public void init() {
-        client = WebClient.create(vertx, new WebClientOptions().setDefaultHost(host).setDefaultPort(port));
-    }
-
-
-    @Incoming("temperature")
-    @Acknowledgment(POST_PROCESSING)
-    public CompletionStage<Void> saveSnapshot(JsonObject temperature) {
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        LOGGER.info("Saving snapshot {}", temperature.encode());
-        client.post("/snapshot").rxSendJsonObject(temperature)
-                .ignoreElement()
-                .subscribe(
-                        () -> {
-                            LOGGER.info("Snapshot sent successfully");
-                            future.complete(null);
-                        },
-                        err -> {
-                            err.printStackTrace();
-                            future.completeExceptionally(err);
-                        }
-                );
-        return future;
-    }
-
+  @Incoming("temperature")
+  @Acknowledgment(POST_PROCESSING)
+  public CompletionStage<Void> saveSnapshot(JsonObject temperature) {
+    CompletableFuture<Void> future = new CompletableFuture<>();
+    LOGGER.info("Saving snapshot {}", temperature.encode());
+    client.post("/snapshot").rxSendJsonObject(temperature)
+      .ignoreElement()
+      .subscribe(
+        () -> {
+          LOGGER.info("Snapshot sent successfully");
+          future.complete(null);
+        },
+        err -> {
+          err.printStackTrace();
+          future.completeExceptionally(err);
+        }
+      );
+    return future;
+  }
 }

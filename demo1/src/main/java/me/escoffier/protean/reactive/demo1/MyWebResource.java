@@ -11,14 +11,13 @@ import javax.ws.rs.core.MediaType;
 @Path("/app")
 public class MyWebResource {
 
-    @Inject
-    private Neo neo;
+  @Inject
+  private Neo neo;
 
-    @Produces(MediaType.SERVER_SENT_EVENTS)
-    @GET
-    @Path("/neo")
-    public Publisher<String> stream() {
-        return neo.state();
-    }
-
+  @Produces(MediaType.SERVER_SENT_EVENTS)
+  @GET
+  @Path("/neo")
+  public Publisher<String> stream() {
+    return neo.state();
+  }
 }

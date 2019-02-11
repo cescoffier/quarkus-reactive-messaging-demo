@@ -49,13 +49,13 @@ public class HealthDataProcessor {
   @Broadcast
   public PublisherBuilder<Message<JsonObject>> process(PublisherBuilder<MqttMessage> input) {
     return input
-            .map(MqttMessage::getPayload)
-            .map(array -> Buffer.buffer(array).toJsonObject())
-            .flatMapCompletionStage(json -> invokeSnapshotService(json).thenApply(x -> {
-              LOGGER.info("The snapshot has been sent to the snapshot service");
-              return json;
-            }))
-            .map(json -> Message.of(json.getJsonObject("heartbeat")));
+      .map(MqttMessage::getPayload)
+      .map(array -> Buffer.buffer(array).toJsonObject())
+      .flatMapCompletionStage(json -> invokeSnapshotService(json).thenApply(x -> {
+        LOGGER.info("The snapshot has been sent to the snapshot service");
+        return json;
+      }))
+      .map(json -> Message.of(json.getJsonObject("heartbeat")));
   }
 
   /**
@@ -75,5 +75,4 @@ public class HealthDataProcessor {
     });
     return future;
   }
-
 }
