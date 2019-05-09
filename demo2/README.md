@@ -12,7 +12,7 @@ This demo extends Demo 1.
 
 ``bash
 cd demo2
-mvn compile shamrock:dev
+mvn compile quarkus:dev
 ``
 
 Open http://localhost:8080.

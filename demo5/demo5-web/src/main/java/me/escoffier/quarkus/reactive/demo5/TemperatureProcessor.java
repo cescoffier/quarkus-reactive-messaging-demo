@@ -1,11 +1,11 @@
 package me.escoffier.quarkus.reactive.demo5;
 
-import io.smallrye.reactive.messaging.annotations.Acknowledgment;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.reactivex.core.Vertx;
 import io.vertx.reactivex.ext.web.client.WebClient;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,8 @@ import javax.inject.Inject;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import static io.smallrye.reactive.messaging.annotations.Acknowledgment.Mode.POST_PROCESSING;
+import static org.eclipse.microprofile.reactive.messaging.Acknowledgment.Strategy.POST_PROCESSING;
+
 
 @ApplicationScoped
 public class TemperatureProcessor {

@@ -14,32 +14,24 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-reactive-messaging-deployment</artifactId>
-      <version>${shamrock.version}</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-vertx-deployment</artifactId>
-      <version>${shamrock.version}</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-vertx</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-jaxrs-deployment</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-arc-deployment</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-arc</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-reactive-streams-operators-deployment</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.smallrye.reactive</groupId>
-      <artifactId>smallrye-reactive-messaging-kafka</artifactId>
-      <!-- TODO extract version -->
-      <version>0.0.4</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-streams-operators</artifactId>
     </dependency>
 
     <dependency>
@@ -49,24 +41,22 @@
     </dependency>
 
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-reactive-messaging-kafka-connector-deployment</artifactId>
-      <version>1.0.0.Alpha1-SNAPSHOT</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-client</artifactId>
-      <version>${vertx.version}</version>
+      <groupId>io.smallrye.reactive</groupId>
+      <artifactId>smallrye-axle-web-client</artifactId>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>org.jboss.shamrock</groupId>
-        <artifactId>shamrock-maven-plugin</artifactId>
-        <version>${shamrock.version}</version>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-maven-plugin</artifactId>
+        <version>${quarkus.version}</version>
         <executions>
           <execution>
             <goals>
@@ -83,9 +73,9 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.jboss.shamrock</groupId>
-            <artifactId>shamrock-maven-plugin</artifactId>
-            <version>${shamrock.version}</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <version>${quarkus.version}</version>
             <executions>
               <execution>
                 <goals>

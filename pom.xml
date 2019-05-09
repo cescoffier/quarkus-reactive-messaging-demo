@@ -11,9 +11,8 @@
   <name>Reactive Messaging Demo</name>
 
   <properties>
-    <vertx.version>3.6.2</vertx.version>
-    <shamrock.version>1.0.0.Alpha1-SNAPSHOT</shamrock.version>
-    <smallrye-reactive-messaging.version>0.0.4</smallrye-reactive-messaging.version>
+    <vertx.version>3.6.3</vertx.version>
+    <quarkus.version>0.14.0</quarkus.version>
   </properties>
 
   <modules>
@@ -28,9 +27,9 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.jboss.shamrock</groupId>
-        <artifactId>shamrock-bom</artifactId>
-        <version>${shamrock.version}</version>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>${quarkus.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

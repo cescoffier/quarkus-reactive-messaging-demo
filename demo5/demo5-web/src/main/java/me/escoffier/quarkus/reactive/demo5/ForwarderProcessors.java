@@ -1,9 +1,9 @@
 package me.escoffier.quarkus.reactive.demo5;
 
 import io.reactivex.processors.FlowableProcessor;
-import io.smallrye.reactive.messaging.annotations.Acknowledgment;
 import io.smallrye.reactive.messaging.annotations.Broadcast;
 import io.vertx.core.json.JsonObject;
+import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.concurrent.CompletionStage;
 
-import static io.smallrye.reactive.messaging.annotations.Acknowledgment.Mode.*;
+import static org.eclipse.microprofile.reactive.messaging.Acknowledgment.Strategy.*;
 
 /**
  * Consumes the data from Kafka, acknowledge the messages and forward to an internal topic.

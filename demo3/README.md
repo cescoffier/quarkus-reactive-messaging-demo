@@ -11,7 +11,7 @@ This demo extends Demo 2.
 
 ``bash
 cd demo3
-mvn compile shamrock:dev
+mvn compile quarkus:dev
 ``
 
 Open http://localhost:8080.

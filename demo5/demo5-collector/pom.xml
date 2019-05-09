@@ -20,56 +20,45 @@
     </dependency>
 
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-reactive-messaging-deployment</artifactId>
-      <version>${shamrock.version}</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-vertx-deployment</artifactId>
-      <version>${shamrock.version}</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-vertx</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-arc-deployment</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-arc</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-jaxrs-deployment</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-reactive-streams-operators-deployment</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-streams-operators</artifactId>
     </dependency>
 
     <dependency>
       <groupId>io.smallrye.reactive</groupId>
       <artifactId>smallrye-reactive-messaging-mqtt</artifactId>
-      <version>${smallrye-reactive-messaging.version}</version>
+      <version>0.0.4</version>
     </dependency>
 
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-reactive-messaging-kafka-connector-deployment</artifactId>
-      <version>1.0.0.Alpha1-SNAPSHOT</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
     </dependency>
-
-    <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
-    <dependency>
-      <groupId>io.reactivex.rxjava2</groupId>
-      <artifactId>rxjava</artifactId>
-      <version>2.2.5</version>
-    </dependency>
-
 
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>org.jboss.shamrock</groupId>
-        <artifactId>shamrock-maven-plugin</artifactId>
-        <version>${shamrock.version}</version>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-maven-plugin</artifactId>
+        <version>${quarkus.version}</version>
         <executions>
           <execution>
             <goals>
@@ -87,9 +76,9 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.jboss.shamrock</groupId>
-            <artifactId>shamrock-maven-plugin</artifactId>
-            <version>${shamrock.version}</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <version>${quarkus.version}</version>
             <executions>
               <execution>
                 <goals>

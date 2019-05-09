@@ -2,10 +2,10 @@ package me.escoffier.quarkus.reactive.demo4;
 
 import io.smallrye.reactive.messaging.annotations.Broadcast;
 import io.smallrye.reactive.messaging.mqtt.MqttMessage;
-import io.vertx.core.Vertx;
+import io.vertx.axle.core.Vertx;
+import io.vertx.axle.ext.web.client.WebClient;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.client.WebClientOptions;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
@@ -66,13 +66,6 @@ public class HealthDataProcessor {
    */
   private CompletionStage<Void> invokeSnapshotService(JsonObject data) {
     CompletableFuture<Void> future = new CompletableFuture<>();
-    client.post("/snapshot").sendJsonObject(data, resp -> {
-      if (resp.failed()) {
-        future.completeExceptionally(resp.cause());
-      } else {
-        future.complete(null);
-      }
-    });
-    return future;
+    return client.post("/snapshot").sendJsonObject(data).thenApply(resp -> null);
   }
 }
