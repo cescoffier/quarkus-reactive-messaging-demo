@@ -16,7 +16,7 @@ public class MyWebResource {
 
   @Inject
   @Stream("heartbeat")
-  private PublisherBuilder<JsonObject> heartbeat;
+  PublisherBuilder<JsonObject> heartbeat;
 
   @Inject
   @Stream("state")

@@ -19,7 +19,7 @@ public class MyWebResource {
 
   @Inject
   @Stream("heartbeat")
-  private Publisher<JsonObject> heartbeat;
+  Publisher<JsonObject> heartbeat;
 
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @GET
