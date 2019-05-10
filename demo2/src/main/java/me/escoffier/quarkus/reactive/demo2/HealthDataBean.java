@@ -19,9 +19,7 @@ public class HealthDataBean {
 
   @Outgoing("health")
   public CompletionStage<JsonObject> health() {
-    CompletableFuture<JsonObject> future = new CompletableFuture<>();
-    delay(() -> future.complete(patient.measure()));
-    return future;
+    return CompletableFuture.supplyAsync(patient::measure, this::delay);
   }
 
   private void delay(Runnable runnable) {
