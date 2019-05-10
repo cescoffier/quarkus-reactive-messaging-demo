@@ -33,7 +33,7 @@ public class TemperatureProcessor {
   int port;
 
   @Inject
-  private Vertx vertx;
+  Vertx vertx;
 
   private WebClient client;
 
