@@ -27,7 +27,6 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-mqtt</artifactId>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -38,8 +37,45 @@
         <configuration>
           <mainClass>me.escoffier.quarkus.reactive.mqtt.SensorApp</mainClass>
         </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <configuration>
+                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                  <disableReports>true</disableReports>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
