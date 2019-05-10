@@ -12,7 +12,7 @@ import java.util.concurrent.*;
 public class HealthDataBean {
 
   @Inject
-  private Patient patient;
+  Patient patient;
 
   // Just here to delay the emissions
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();

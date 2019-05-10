@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 public class MyWebResource {
 
   @Inject
-  private Neo neo;
+  Neo neo;
 
   @Inject
   @Stream("heartbeat")

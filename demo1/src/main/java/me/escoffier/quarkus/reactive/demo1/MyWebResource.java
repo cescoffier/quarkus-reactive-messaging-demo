@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 public class MyWebResource {
 
   @Inject
-  private Neo neo;
+  Neo neo;
 
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @GET
