@@ -3,17 +3,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>me.escoffier.protean</groupId>
-  <artifactId>protean-reactive-messaging-demo-project</artifactId>
+  <groupId>me.escoffier.quarkus</groupId>
+  <artifactId>quarkus-reactive-messaging-demo-project</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Reactive Messaging Demo</name>
 
   <properties>
-    <vertx.version>3.6.2</vertx.version>
-    <shamrock.version>1.0.0.Alpha1-SNAPSHOT</shamrock.version>
-    <smallrye-reactive-messaging.version>0.0.4</smallrye-reactive-messaging.version>
+    <vertx.version>3.6.3</vertx.version>
+    <quarkus.version>0.14.0</quarkus.version>
+    <smallrye-reactive-messaging.version>0.0.7</smallrye-reactive-messaging.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
   </properties>
 
   <modules>
@@ -28,26 +31,43 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.jboss.shamrock</groupId>
-        <artifactId>shamrock-bom</artifactId>
-        <version>${shamrock.version}</version>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>${quarkus.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.smallrye.reactive</groupId>
+        <artifactId>smallrye-reactive-messaging-mqtt</artifactId>
+        <version>${smallrye-reactive-messaging.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-mqtt</artifactId>
+        <version>${vertx.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
 
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+          <configuration>
+            <parameters>true</parameters>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-maven-plugin</artifactId>
+          <version>${quarkus.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
+
 </project>

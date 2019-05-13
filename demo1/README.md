@@ -9,7 +9,7 @@
 
 ``bash
 cd demo1
-mvn compile shamrock:dev 
+mvn compile quarkus:dev 
 ``
 
 Open http://localhost:8080
@@ -17,7 +17,7 @@ Open http://localhost:8080
 The application is stopped with `CTRL+C`.
 
 
-**IMPORTANT:** while it uses the Shamrock Maven Plugin, it's not required. It's just for the hot reload.
+**IMPORTANT:** while it uses the Quarkus Maven Plugin, it's not required. It's just for the hot reload.
 
 ## Points of interest
 

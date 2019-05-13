@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>me.escoffier.protean</groupId>
-    <artifactId>protean-reactive-messaging-demo-project</artifactId>
+    <groupId>me.escoffier.quarkus</groupId>
+    <artifactId>quarkus-reactive-messaging-demo-project</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
@@ -14,26 +14,20 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-reactive-messaging-deployment</artifactId>
-      <version>${shamrock.version}</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-jaxrs-deployment</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.shamrock</groupId>
-      <artifactId>shamrock-arc-deployment</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>org.jboss.shamrock</groupId>
-        <artifactId>shamrock-maven-plugin</artifactId>
-        <version>${shamrock.version}</version>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-maven-plugin</artifactId>
         <executions>
           <execution>
             <goals>
@@ -44,15 +38,20 @@
       </plugin>
     </plugins>
   </build>
+
   <profiles>
     <profile>
       <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
       <build>
         <plugins>
           <plugin>
-            <groupId>org.jboss.shamrock</groupId>
-            <artifactId>shamrock-maven-plugin</artifactId>
-            <version>${shamrock.version}</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
             <executions>
               <execution>
                 <goals>
@@ -60,6 +59,7 @@
                 </goals>
                 <configuration>
                   <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                  <disableReports>true</disableReports>
                 </configuration>
               </execution>
             </executions>
@@ -68,6 +68,5 @@
       </build>
     </profile>
   </profiles>
-
 
 </project>

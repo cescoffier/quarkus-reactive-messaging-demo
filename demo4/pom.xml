@@ -4,12 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>me.escoffier.protean</groupId>
-    <artifactId>protean-reactive-messaging-demo-project</artifactId>
+    <groupId>me.escoffier.quarkus</groupId>
+    <artifactId>quarkus-reactive-messaging-demo-project</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>protean-reactive-messaging-demo4-parent</artifactId>
+  <artifactId>quarkus-reactive-messaging-demo4-parent</artifactId>
   <packaging>pom</packaging>
 
   <name>Reactive Messaging Demo 4 Parent</name>

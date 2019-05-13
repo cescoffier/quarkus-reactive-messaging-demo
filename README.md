@@ -1,22 +1,5 @@
 # Bring Reactive to Java Enterprise Developer demo
 
-## Prerequisites
-
-* SmallRye Reactive Stream Operators implementation
-
-```bash
-git clone git@github.com:smallrye/smallrye-reactive-streams-operators.git
-cd smallrye-reactive-streams-operators
-mvn clean install
-```
-
-* SmallRye Reactive Messaging implementation
-```bash
-git clone git@gitlab.com:clement-escoffier/smallrye-reactive-messaging-provider.git
-cd smallrye-reactive-messaging-provider
-mvn clean install
-```
-
 ## Build
 
 ```bash
