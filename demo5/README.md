@@ -93,7 +93,7 @@ The application is stopped with `CTRL+C`.
   * the method `processSteps` method use RX Java 2 and returns a `Flowable`. Notice the `window` operator to sum the 
   number of leaps
   
-* The `META-INF/microprofile-config.properties` files shows Kafka and MQTT configuration
+* The `application.properties` files shows Kafka and MQTT configuration
 
   * Kafka sink configuration
   * MQTT source configuration  

@@ -68,7 +68,7 @@ The application is stopped with `CTRL+C`.
   * We transform the payload into JSON object 
   * We emit messages using the `Message.of` method
     
-* The `src/main/resources/META-INF/microprofile-config.properties` file:
+* The `src/main/resources/application.properties` file:
 
   * Configure the access to the MQTT broker
   * Use MicroProfile Config
