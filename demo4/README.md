@@ -47,10 +47,10 @@ cd demo4/snapshot
 The application is stopped using `CTRL+C`
 
 * Terminal 4 - Run the application
-``bash
+```bash
 cd demo4/application
 ./target/demo4-1.0-SNAPSHOT-runner
-``
+```
 
 Open http://localhost:8080.
 

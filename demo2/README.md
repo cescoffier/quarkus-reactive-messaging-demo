@@ -10,10 +10,10 @@ This demo extends Demo 1.
 
 ## Run the demo
 
-``bash
+```bash
 cd demo2
 mvn compile quarkus:dev
-``
+```
 
 Open http://localhost:8080.
 

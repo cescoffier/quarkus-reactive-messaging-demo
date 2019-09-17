@@ -7,10 +7,10 @@
 
 ## Run the demo
 
-``bash
+```bash
 cd demo1
 mvn compile quarkus:dev 
-``
+```
 
 Open http://localhost:8080
 
