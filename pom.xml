@@ -11,12 +11,11 @@
   <name>Reactive Messaging Demo</name>
 
   <properties>
-    <vertx.version>3.6.3</vertx.version>
-    <quarkus.version>0.14.0</quarkus.version>
-    <smallrye-reactive-messaging.version>0.0.7</smallrye-reactive-messaging.version>
+    <vertx.version>3.8.1</vertx.version>
+    <quarkus.version>0.22.0</quarkus.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
   </properties>
 
   <modules>
@@ -36,11 +35,6 @@
         <version>${quarkus.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.smallrye.reactive</groupId>
-        <artifactId>smallrye-reactive-messaging-mqtt</artifactId>
-        <version>${smallrye-reactive-messaging.version}</version>
       </dependency>
       <dependency>
         <groupId>io.vertx</groupId>

@@ -47,7 +47,7 @@ public class HealthDataProcessor {
   @Incoming("health")
   @Outgoing("heartbeat")
   @Broadcast
-  public PublisherBuilder<Message<JsonObject>> process(PublisherBuilder<MqttMessage> input) {
+  public PublisherBuilder<Message<JsonObject>> process(PublisherBuilder<MqttMessage<byte[]>> input) {
     return input
       .map(MqttMessage::getPayload)
       .map(array -> Buffer.buffer(array).toJsonObject())

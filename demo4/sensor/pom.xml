@@ -12,7 +12,6 @@
 
   <artifactId>sensor</artifactId>
 
-
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>

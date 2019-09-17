@@ -43,8 +43,8 @@
       <artifactId>vertx-mqtt</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.smallrye.reactive</groupId>
-      <artifactId>smallrye-reactive-messaging-mqtt</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging-mqtt</artifactId>
     </dependency>
   </dependencies>
 

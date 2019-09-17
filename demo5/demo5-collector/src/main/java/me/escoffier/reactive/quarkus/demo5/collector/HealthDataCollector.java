@@ -27,8 +27,8 @@ public class HealthDataCollector {
 
   @Incoming("health")
   @Outgoing("output")
-  public ProcessorBuilder<MqttMessage, KafkaMessage<String, JsonObject>> filterTemperature() {
-    return ReactiveStreams.<MqttMessage>builder()
+  public ProcessorBuilder<MqttMessage<byte[]>, KafkaMessage<String, JsonObject>> filterTemperature() {
+    return ReactiveStreams.<MqttMessage<byte[]>>builder()
       .map(message -> Buffer.buffer(message.getPayload()).toJsonObject())
       .map(json -> json.getJsonObject("temperature"))
       .peek(x -> LOGGER.info("Received {} as temperature", x))
@@ -37,7 +37,7 @@ public class HealthDataCollector {
 
   @Incoming("health")
   @Outgoing("output")
-  public PublisherBuilder<KafkaMessage<String, JsonObject>> filterHeartbeat(PublisherBuilder<MqttMessage> input) {
+  public PublisherBuilder<KafkaMessage<String, JsonObject>> filterHeartbeat(PublisherBuilder<MqttMessage<byte[]>> input) {
     return input
       .map(message -> Buffer.buffer(message.getPayload()).toJsonObject())
       .map(json -> json.getJsonObject("heartbeat"))
@@ -47,7 +47,7 @@ public class HealthDataCollector {
 
   @Incoming("health")
   @Outgoing("output")
-  public Publisher<KafkaMessage<String, JsonObject>> filterState(Flowable<MqttMessage> input) {
+  public Publisher<KafkaMessage<String, JsonObject>> filterState(Flowable<MqttMessage<byte[]>> input) {
     return input
       .map(message -> Buffer.buffer(message.getPayload()).toJsonObject())
       .map(json -> json.getJsonObject("state"))
@@ -58,7 +58,7 @@ public class HealthDataCollector {
 
   @Incoming("health")
   @Outgoing("output")
-  public Flowable<KafkaMessage<String, JsonObject>> processSteps(Flowable<MqttMessage> input) {
+  public Flowable<KafkaMessage<String, JsonObject>> processSteps(Flowable<MqttMessage<byte[]>> input) {
     return input
       .doOnNext(json -> LOGGER.info("Got: {}", json))
       .map(message -> Buffer.buffer(message.getPayload()).toJsonObject())
