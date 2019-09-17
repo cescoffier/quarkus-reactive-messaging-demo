@@ -72,6 +72,6 @@ The application is stopped with `CTRL+C`.
 
   * Configure the access to the MQTT broker
   * Use MicroProfile Config
-  * Naming convention - `smallrye.messaging.[source|sink].[name].$attribute=$value`
+  * Naming convention - `mp.messaging.[incoming|outgoing].[name].$attribute=$value`
   
     
